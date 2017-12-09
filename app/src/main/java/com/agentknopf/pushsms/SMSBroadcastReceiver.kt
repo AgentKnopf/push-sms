@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.telephony.SmsMessage
 import android.util.Log
 import com.agentknopf.pushsms.extensions.EMPTY_STRING
-import java.util.*
+import com.agentknopf.pushsms.model.Sms
 
 private const val TAG = "SMSBroadcastReceiver"
 private const val SMS_RECEIVED_ACTION = "android.provider.Telephony.SMS_RECEIVED"
@@ -22,18 +22,18 @@ internal class SMSBroadcastReceiver : BroadcastReceiver() {
         Log.i(TAG, "Intercepted SMS")
         val action = intent?.action ?: EMPTY_STRING
         when (action) {
-            SMS_RECEIVED_ACTION -> intent?.extras?.let { SmsHandler(createSms(intent.extras)).process() }
+            SMS_RECEIVED_ACTION -> intent?.extras?.let { SmsProcessor(createSms(intent.extras)).process() }
         }
     }
 
     /**
      * Creates an SMS from a bundle.
      */
-    private fun createSms(bundle: Bundle): SmsMessage {
+    private fun createSms(bundle: Bundle): Sms {
         val data: Array<Any> = bundle.get("pdus") as Array<Any>
         //Take the last sms we got
         data[data.lastIndex].let {
-            return SmsMessage.createFromPdu(data[data.lastIndex] as ByteArray, bundle.getString("format"))
+            return Sms(SmsMessage.createFromPdu(data[data.lastIndex] as ByteArray, bundle.getString("format")))
         }
     }
 }
