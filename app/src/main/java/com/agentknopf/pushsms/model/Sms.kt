@@ -7,6 +7,6 @@ import android.telephony.SmsMessage
  *
  * Created by agentknopf on 10.12.17.
  */
-data class Sms(val text: String, val recipient: String) {
+internal data class Sms(val text: String, val recipient: String) {
     constructor(smsMessage: SmsMessage) : this(smsMessage.messageBody, smsMessage.originatingAddress)
 }
