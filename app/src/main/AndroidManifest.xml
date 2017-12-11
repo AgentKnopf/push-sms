@@ -35,7 +35,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".add.AddRule">
+        <activity android:name=".add.AddRuleActivity">
         </activity>
     </application>
 

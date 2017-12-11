@@ -1,13 +1,13 @@
 package com.agentknopf.pushsms.home
 
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.agentknopf.pushsms.R
-
+import com.agentknopf.pushsms.add.AddRuleActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
 /**
@@ -23,8 +23,8 @@ class HomeView : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
-        fab.setOnClickListener { view ->
-            //TODO implement handling of user request to create a new rule
+        fab.setOnClickListener { _ ->
+            startActivity(Intent(this, AddRuleActivity::class.java))
         }
     }
 

@@ -7,7 +7,7 @@ import com.agentknopf.pushsms.R
 /**
  * Let's the user add a new rule.
  */
-class AddRule : AppCompatActivity() {
+class AddRuleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

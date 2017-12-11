@@ -1,7 +1,5 @@
 package com.agentknopf.pushsms.model
 
-import com.agentknopf.pushsms.model.ForwardOnMatchingText
-import com.agentknopf.pushsms.model.Sms
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
