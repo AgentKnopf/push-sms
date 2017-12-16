@@ -14,4 +14,9 @@ class Store(store: Store?) {
     init {
         rules = store?.rules ?: listOf()
     }
+
+    /**
+     * A list of all the currently available rules.
+     */
+    fun getRules() = rules
 }

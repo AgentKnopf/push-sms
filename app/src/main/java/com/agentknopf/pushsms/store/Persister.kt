@@ -1,36 +1,44 @@
 package com.agentknopf.pushsms.store
 
 import android.support.annotation.WorkerThread
+import com.agentknopf.pushsms.getInputStream
+import com.agentknopf.pushsms.getOutputStream
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
-import java.io.File
+import java.nio.charset.Charset
+
+/** Name of the file to which the persister writes */
+private const val FILE_NAME = "push-sms-store"
 
 /**
  * Responsible for saving the current state to disk.
  *
  * Created by agentknopf on 10.12.17.
  */
-internal class Persister(private val storage: File) {
+object Persister {
     //Keeps a reference to the store
     private lateinit var store: Store
 
+    //TODO consider calling from a co-routine
     @WorkerThread
     fun persistStore() {
-        if (store != null) {
-            storage.printWriter().use { out ->
-                out.print(serializeStore(store))
-            }
+        store?.let {
+            val output = getOutputStream(FILE_NAME)
+            val value = serializeStore(store)
+            output.write(value.toByteArray(Charset.defaultCharset()))
+            output.close()
         }
     }
 
     @WorkerThread
     fun loadStore(): Store {
-        //TODO Not thread safe
         if (store == null) {
-            val input = storage.inputStream()
-            val result = input.bufferedReader().use { it.readText() }
-            store = if (result.isBlank()) Store(null) else deserializeStore(result)
+            synchronized(this) {
+                val input = getInputStream(FILE_NAME)
+                val result = input.bufferedReader().use { it.readText() }
+                store = if (result.isBlank()) Store(null) else deserializeStore(result)
+            }
         }
         return store
     }

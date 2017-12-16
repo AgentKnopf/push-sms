@@ -15,4 +15,14 @@ internal interface IRule<in T> {
      * Executes the rule.
      */
     fun executeRule(input: T)
+
+    /**
+     * @return title of this rule.
+     */
+    fun getTitle(): String
+
+    /**
+     * @return detailed description of this rule.
+     */
+    fun getDescription(): String
 }
