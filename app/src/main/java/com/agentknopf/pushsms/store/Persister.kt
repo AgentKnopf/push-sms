@@ -20,7 +20,6 @@ object Persister {
     //Keeps a reference to the store
     private lateinit var store: Store
 
-    //TODO consider calling from a co-routine
     @WorkerThread
     fun persistStore() {
         store?.let {

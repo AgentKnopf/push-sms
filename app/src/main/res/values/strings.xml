@@ -3,4 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="ForwardOnMatchingText_Title">Forward on matching text</string>
     <string name="ForwardOnMatchingText_Details">Forwards to %s if text contains %s</string>
+    <string name="AddRule_ExpectedTest">Expected Text</string>
+    <string name="AddRule_RecipientPhoneNumber">Recipient (international number)</string>
+    <string name="ActionSave">Save</string>
 </resources>

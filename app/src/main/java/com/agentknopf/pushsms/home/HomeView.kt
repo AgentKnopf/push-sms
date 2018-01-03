@@ -25,7 +25,7 @@ class HomeView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(findViewById(R.id.toolbar))
 
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         recyclerView = findViewById(R.id.rules_listview)

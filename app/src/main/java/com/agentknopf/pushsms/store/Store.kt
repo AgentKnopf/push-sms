@@ -19,4 +19,15 @@ class Store(store: Store?) {
      * A list of all the currently available rules.
      */
     fun getRules() = rules
+
+    /**
+     * Dispatches a new action to the store.
+     */
+    fun dispatch(action: Action) = when (action) {
+        is AddSmsRuleAction -> rules = rules.plus(action.rule)
+        is RemoveSmsRuleAction -> {
+            //First remove the original entry
+            rules = rules.minus(action.rule)
+        }
+    }
 }

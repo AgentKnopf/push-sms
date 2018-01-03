@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.agentknopf.pushsms.add.AddRuleActivity">
+    <item
+        android:id="@+id/action_save"
+        android:orderInCategory="100"
+        android:title="@string/ActionSave"
+        android:icon="@drawable/ic_check_24dp"
+        app:showAsAction="always"/>
+</menu>
