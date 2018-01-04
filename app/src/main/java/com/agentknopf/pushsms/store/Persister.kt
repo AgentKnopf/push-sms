@@ -1,6 +1,7 @@
 package com.agentknopf.pushsms.store
 
 import android.support.annotation.WorkerThread
+import com.agentknopf.pushsms.createFileIfNotExisting
 import com.agentknopf.pushsms.getInputStream
 import com.agentknopf.pushsms.getOutputStream
 import com.squareup.moshi.JsonAdapter
@@ -18,13 +19,13 @@ private const val FILE_NAME = "push-sms-store"
  */
 object Persister {
     //Keeps a reference to the store
-    private lateinit var store: Store
+    private var store: Store? = null
 
     @WorkerThread
     fun persistStore() {
         store?.let {
             val output = getOutputStream(FILE_NAME)
-            val value = serializeStore(store)
+            val value = serializeStore(store!!)
             output.write(value.toByteArray(Charset.defaultCharset()))
             output.close()
         }
@@ -34,12 +35,13 @@ object Persister {
     fun loadStore(): Store {
         if (store == null) {
             synchronized(this) {
+                createFileIfNotExisting(FILE_NAME)
                 val input = getInputStream(FILE_NAME)
                 val result = input.bufferedReader().use { it.readText() }
                 store = if (result.isBlank()) Store(null) else deserializeStore(result)
             }
         }
-        return store
+        return store!!
     }
 
     private fun deserializeStore(store: String): Store = createAdapter().fromJson(store)!!

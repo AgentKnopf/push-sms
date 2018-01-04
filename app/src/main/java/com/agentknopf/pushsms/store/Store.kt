@@ -7,11 +7,10 @@ import com.agentknopf.pushsms.model.SmsRule
  *
  * Created by agentknopf on 10.12.17.
  */
-class Store(store: Store?) {
+class Store {
+    private var rules: List<SmsRule>
 
-    private var rules: List<SmsRule> = listOf()
-
-    init {
+    constructor(store: Store?) {
         rules = store?.rules ?: listOf()
     }
 

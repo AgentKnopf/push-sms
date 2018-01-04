@@ -3,6 +3,17 @@ package com.agentknopf.pushsms
 import android.app.Application
 import android.content.Context
 import android.support.annotation.StringRes
+import java.io.File
+
+/**
+ * If the given file does not exist yet, it'll be created.
+ */
+fun createFileIfNotExisting(fileName: String) {
+    val file = File(App.Companion.getInstance().filesDir, fileName)
+    if (!file.exists()) {
+        file.createNewFile()
+    }
+}
 
 /**
  * Output stream pointing to a file of the given name. Use this to write data to the given file.
